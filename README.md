@@ -10,10 +10,27 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 Write 3 different ways of safely unwrapping and printing the value of `userName`.  If it is nil, print "No name".
 
 - Method one: Check for nil and force unwrap
+```swift
+var userName: String?
+print(userName!) //fatal error
+```
 
 - Method two: Optional binding
+```swift
+var userName: String?
+
+if let userName = userName {
+print(userName)
+} else {
+print("no name")
+}
+```
 
 - Method three: Nil coalescing
+```swift
+var userName: String?
+print(userName ?? "no name")
+```
 
 
 ## Question 2
@@ -21,15 +38,34 @@ Write 3 different ways of safely unwrapping and printing the value of `userName`
 Given optional string `backgroundColor`, write code that safely unwraps and prints it. If backgroundColor is nil, give it a value.
 
 `var backgroundColor: String?`
+```swift
 
+if let backgroundColor = backgroundColor {
+print("backgroud color is \(backgroundColor)")
+} else {
+backgroundColor = "pink"
+print("backgroud color is \(backgroundColor!)")
+}
+
+```
 
 ## Question 3
 
 Given an optional width and an optional height of a rectangle, write code that calculates and prints the area. Print an error message if either value is nil.
 
 ```swift
+
 var width: Double?
 var height: Double?
+
+if let width = width,
+let height = height {
+print(width * height)
+}
+else {
+print("width/height is nil")
+}
+
 ```
 
 
@@ -41,6 +77,22 @@ Given the following optional variables `name`, `age` and `height`. Write code so
 var name: String?
 var age: Int?
 var height: Double?
+
+if let name = name {
+if let age = age {
+if let height = height {
+print("name is \(name), age is \(age), and height is \(height)")
+}
+print("name is \(name), age is \(age), and height is nil")
+}
+print("name is \(name), age is nil, and height is nil")
+} else {
+print("all variables are nil")
+}
+
+
+
+
 ```
 
 
@@ -52,6 +104,16 @@ Given the variables `firstName`, `middleName` and `lastName`. Create a variable 
 var firstName: String = "Johnny"
 var middleName: String?
 var lastName: String = "Stone"
+
+
+if let middleName = middleName {
+let fullName = ("\(firstName)  \(middleName)  \(lastName)")
+print(fullName)
+} else {
+let fullName = ("\(firstName) \(lastName)")
+print(fullName)
+}
+
 ```
 
 
@@ -61,6 +123,20 @@ Write code that adds 15 to `myIntString`, then prints the sum. Use the `Int()` c
 
 `let myIntString = "35"`
 
+```swift
+
+//myIntString is not optional, so this cannot be unwrapped
+let myIntString = "35"
+
+let myUnwrappedIntString = Int(myIntString)
+
+if let unwrappedIntString = myUnwrappedIntString {
+let sum = unwrappedIntString + 15
+print(sum)
+}
+
+```
+
 
 ## Question 7
 
@@ -69,10 +145,14 @@ Given an optional tuple of optional Ints, write code to safely unwrap the tuple 
 ```swift
 var scores: (Int?, Int?, Int?)?
 
-var testCaseOne: (Int?, Int?, Int?)? = (4, nil, 7)
-var testCaseTwo: (Int?, Int?, Int?)? = (nil, nil, 9)
-var testCaseThree: (Int?, Int?, Int?)? = (5, 10, 24)
+var testCaseOne = (4, nil, 7)
+var testCaseTwo = (nil, nil, 9)
+var testCaseThree = (5, 10, 24)
+
+
+
 ```
+
 
 
 ## Question 8
