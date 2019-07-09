@@ -12,7 +12,14 @@ Write 3 different ways of safely unwrapping and printing the value of `userName`
 - Method one: Check for nil and force unwrap
 ```swift
 var userName: String?
-print(userName!) //fatal error
+if userName != nil {
+print(userName!)
+} else {
+print("No name.")
+}
+
+//print(userName!) //fatal error
+
 ```
 
 - Method two: Optional binding
@@ -144,11 +151,29 @@ Given an optional tuple of optional Ints, write code to safely unwrap the tuple 
 
 ```swift
 var scores: (Int?, Int?, Int?)?
+var testCaseOne: (Int?, Int?, Int?)? = (4, nil, 7)
+var testCaseTwo: (Int?, Int?, Int?)? = (nil, nil, 9)
+var testCaseThree: (Int?, Int?, Int?)? = (5, 10, 24)
 
-var testCaseOne = (4, nil, 7)
-var testCaseTwo = (nil, nil, 9)
-var testCaseThree = (5, 10, 24)
 
+func turnUnsafeTupleSafe (tuple: (Int?, Int?, Int?)?) {
+
+if let safeTuple = tuple {
+
+let testCase1 = safeTuple.0 ?? 0
+let testCase2 = safeTuple.1 ?? 0
+let testCase3 = safeTuple.2 ?? 0
+
+let tupleSum = testCase1 + testCase2 + testCase3
+
+print(tupleSum)
+}
+}
+
+turnUnsafeTupleSafe(tuple: testCaseTwo)
+turnUnsafeTupleSafe(tuple: testCaseThree)
+turnUnsafeTupleSafe(tuple: testCaseOne)
+turnUnsafeTupleSafe(tuple: scores)
 
 
 ```
@@ -164,6 +189,8 @@ var tuple: (Int, Int)?
 if Bool.random() {
  tuple = (5, 3)
 }
+
+print(tuple ?? "tuple is nil")
 ```
 
 
@@ -172,9 +199,15 @@ if Bool.random() {
 Write code that either doubles `myInt` and then prints it, or prints an error message if myInt is nil.
 
 ```swift
-let myInt: Int?
+var myInt: Int?
+
 if Bool.random() {
- myInt = 5
+myInt = 5
+}
+if let myInt = myInt {
+print(myInt * myInt)
+} else {
+print("tuple is nil")
 }
 ```
 
@@ -189,6 +222,11 @@ let doubleTwo: Double = 5
 
 if Bool.random() {
  myDouble = 12
+ if let myDouble = myDouble {
+ print(myDouble * doubleTwo)
+ } else {
+ print("myDouble is nil")
+ }
 }
 ```
 
@@ -201,7 +239,16 @@ Determine if the variable contains a Boolean or nil value. If nil set the variab
 var isTheGreatest: Bool?
 
 if Bool.random() {
- isTheGreatest = true
+isTheGreatest = true
+
+if let isTheGreatest = isTheGreatest {
+print(isTheGreatest)
+}
+} else {
+isTheGreatest = false
+if let isTheGreatest = isTheGreatest {
+print(isTheGreatest)
+}
 }
 ```
 
