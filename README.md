@@ -372,10 +372,21 @@ Given the array of optional Ints `someNumbers`, write code to find the product o
 
 ```swift
 var someNumbers: [Int?] = []
+var safeNumbers = [Int]()
 
 for i in 0..<20 {
     someNumbers.append(Bool.random() ? i : nil)
 }
+
+for i in 0..<20 {
+someNumbers.append(Bool.random() ? i : nil)
+}
+for i in someNumbers {
+guard let safeNumber = i else {continue}
+safeNumbers.append(safeNumber)
+}
+print(safeNumbers)
+print(safeNumbers.reduce(1,*))
 ```
 
 
@@ -385,8 +396,15 @@ Given the array `poorlyFormattedCityNames`, create a new array with the city nam
 
 ```swift
 let poorlyFormattedCityNames: [String?] = ["new york", "BOSTON", nil, "chicago", nil, "los angeles", nil, "Dallas",]
+//Output: ["New York", "Boston", "Chicago", "Los Angeles", "Dallas"]
+var cityNames = [String]()
 
-Output: ["New York", "Boston", "Chicago", "Los Angeles", "Dallas"]
+for city in poorlyFormattedCityNames {
+guard let safeCity = city else {continue}
+cityNames.append(safeCity.capitalized)
+}
+print(cityNames)
+
 ```
 
 
@@ -396,10 +414,19 @@ Given a random array of optional numbers, create a new array of all the even num
 
 ```swift
 var aBunchOfNumbers: [Int?] = []
+var safeEvenNumbers = [Int]()
 
 for _ in 0..<20 {
- aBunchOfNumbers.append(Bool.random() ? Int(arc4random_uniform(102)) : nil)
+aBunchOfNumbers.append(Bool.random() ? Int(arc4random_uniform(102)) : nil)
 }
+
+for number in aBunchOfNumbers {
+guard let safeNumber = number else {continue}
+if safeNumber % 2 == 0 {
+safeEvenNumbers.append(safeNumber)
+}
+}
+print(safeEvenNumbers)
 ```
 
 
