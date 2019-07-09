@@ -261,11 +261,15 @@ Given the code below print the sum of each non-nil element in `myTuple`.
 var myTuple: (Int?, Int?, Int?, Int?)
 
 if Bool.random() {
- myTuple.0 = 5
- myTuple.2 = 14
+myTuple.0 = 5
+myTuple.2 = 14
+let sum = Int(myTuple.0 ?? 0) + Int(myTuple.2 ?? 0 )
+print("bool is true, sum is \(sum)")
 } else {
- myTuple.1 = 9
- myTuple.3 = 10
+myTuple.1 = 9
+myTuple.3 = 10
+let sum = Int(myTuple.1 ?? 0) + Int(myTuple.3 ?? 0)
+print("bool is false, sum is \(sum)")
 }
 ```
 
@@ -321,6 +325,25 @@ let pokemon: String?
 var evolutionaryStone: String?
 pokemon = starterPokemon()
 evolutionaryStone = eStone()
+
+if let pokemon = pokemon,
+let evolutionaryStone = evolutionaryStone {
+let pokeTuple = (pokemon, evolutionaryStone)
+let pokeStatement = "\(pokemon) evolved using a \(evolutionaryStone) stone!"
+switch pokeTuple {
+case ("Pikachu", "Electric"):
+print(pokeStatement)
+case ("Bulbasaur", "Grass"):
+print(pokeStatement)
+case ("Charmander", "Fire") :
+print(pokeStatement)
+case ("Squirtle", "Water"):
+print(pokeStatement)
+default:
+print("\(pokemon) cannot evolve using a \(evolutionaryStone) stone")
+}
+}
+
 ```
 
 
@@ -332,8 +355,14 @@ Given an optional int `numberOfPeople`, write code that unwraps and prints it **
 var numberOfPeople: Int?
 
 if Bool.random() {
- numberOfPeople = 108
+numberOfPeople = 108
+if let numberOfPeople = numberOfPeople {
+if numberOfPeople % 2 == 0 {
+print(numberOfPeople)
 }
+}
+}
+
 ```
 
 
